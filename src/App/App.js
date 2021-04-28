@@ -1,18 +1,41 @@
+import React from 'react';
 import './App.css';
-import Button from './components/Button/Button'
+import Button from './components/Button/Button';
+import MemeForm from './components/MemeForm/MemeForm';
 
-const uneVar='Demat Breizh';
-function App() {
-  return (
-    <div className="App">
-    <Button label="Ok" onClick={(value)=>{
-      console.log('Bravo tu as clique sur le bouton !!');
-    }}
-    style={{textDecoration: 'underline', fontStyle: 'Italic'}}/>
-    <Button label="Cancel" couleurDeFond={'red'} taillePolice={24} onClick={(value)=>{}}/>
-    <Button label="Don't know" couleurDeFond="orange" taillePolice={18} onClick={(value)=>{}}/>
+class App extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={counter:-1,lastClickedTime:null};
+    console.log(this.state);
+  }
+
+  componentDidMount(){
+    this.setState({counter:0});
+  }
+  render(){
+    return <div className="App"> 
+      <div style={{padding:'20px'}}>Les boutons ont été cliqués : {this.state.counter} fois<br/>
+       {this.state.lastClickedTime &&  'dernier click ' + this.state.lastClickedTime.toISOString()}
+       <MemeForm/>
+       </div>
+
+        
+        
+        <Button label="add" onClick={()=>{
+          //this.state={...this.state,counter:this.state.counter+1};
+          this.setState({counter:this.state.counter+1, lastClickedTime: new Date()});
+          console.log(this.state);
+        }} />
+        <Button label="init" couleurDeFond="red" onClick={()=>{
+          this.setState({counter:0});
+          console.log(this.state);
+        }} />
+
+{JSON.stringify(this.state.formContent)}
+
     </div>
-  );
+  }
 }
 
 export default App;
