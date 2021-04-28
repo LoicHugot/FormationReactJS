@@ -1,0 +1,11 @@
+.FlexGrowLayout {
+    display: flex;
+    height: 80vh; //vh => % de la fenetre
+}
+.child1{
+    flex-grow:1; //prend toute la place dispo
+}
+.child2{
+    //Sans rien prend que la place nécessaire
+    //flex:1;
+}

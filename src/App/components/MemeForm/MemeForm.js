@@ -19,9 +19,8 @@ const MemeForm = (props) => {
       <label htmlFor="meme-image">Image</label>
       <select id="meme-image" value={formContent.image} onChange={(evt)=>{
         setformContent({...formContent,image:evt.target.value})}}>
-        <option value="">image 1</option>
-        <option value="">image 2</option>
-        <option value="img/element.jpg">5eme element</option>
+        <option value="img/5element.jpg">5eme element</option>
+        <option value="img/futurama.jpg">Futurama</option>
       </select>
       
       <div className={styles.textEditor}>
@@ -65,7 +64,6 @@ const MemeForm = (props) => {
         <Button label="Ok" couleurDeFond="darkgreen" onClick={()=>{props.onSubmit(formContent)}}/>
       </div>
       
-      {JSON.stringify(formContent)}
     </form>
   );
 };

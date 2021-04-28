@@ -1,0 +1,39 @@
+{
+  "images": [
+    {
+      "id": 0,
+      "nom": "5ème Element",
+      "src": "5element.jpg",
+      "height": 768,
+      "width": 1024
+    }
+  ],
+  "memes": [
+    {
+      "id": 0,
+      "nom": "multipass",
+      "text": {
+        "x": 400,
+        "y": 500,
+        "value": "MOULTI PASS !!",
+        "color": "#000000",
+        "bold": false,
+        "underline": false
+      },
+      "imageId": 0
+    },
+    {
+      "id": 1,
+      "nom": "test",
+      "text": {
+        "x": 400,
+        "y": 500,
+        "value": "C'est un test !!",
+        "color": "#000000",
+        "bold": false,
+        "underline": true
+      },
+      "imageId": 0
+    }
+  ]
+}
