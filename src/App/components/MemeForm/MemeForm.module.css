@@ -1,4 +1,17 @@
 .MemeForm {
     border:1px solid black;
     padding: 20px;
+    border:1px solid black;
+}
+
+.inlineContainer *{
+    display:inline;
+}
+.inlineContainer>label>input
+[type=number]{
+    width:50px;
+}
+.textEditor{
+    border:1px solid
+    grey;
 }
