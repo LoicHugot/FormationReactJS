@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> is button mount 1`] = `
+<UNDEFINED
+  onClick={[Function]}
+  value="But"
+/>
+`;

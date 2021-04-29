@@ -4,7 +4,7 @@ import './Button.css'
 
 const Button=(props) => {
     console.log(props);
-    return <div style={{...props.style,backgroundColor:props.couleurDeFond,fontSize:props.taillePolice+'px'}} className="Button" onClick={(evt)=>{props.onClick('Cliked')}}>{props.label}</div>;
+    return <div data-testid="Button" style={{...props.style,backgroundColor:props.couleurDeFond,fontSize:props.taillePolice+'px'}} className="Button" onClick={(evt)=>{props.onClick('Cliked')}}>{props.label}</div>;
 };
 Button.propTypes={
     label:PropTypes.string.isRequired,
