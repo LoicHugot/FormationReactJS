@@ -1,11 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './MemeForm.module.css';
 import Button from '../Button/Button';
+import store, {initialState, REDUCER_ACTIONS} from '../../store/store'
+// import { useParams, useHistory, useLocation } from 'react-router-dom';
+import { withRouter} from 'react-router-dom'
 
-export const initialState = { name: '', text: { x: 0, y: 0, value: '', bold: false, underline: false, color: '#000000' }, imageId: '' }
-const MemeForm = (props) => {
-  const [formContent, setformContent] = useState(initialState);
+
+function MemeForm (props) {
+  const [formContent, setformContent] = useState(initialState.currentMeme);
+  const [images, setimages] = useState(initialState.images);
+  // console.log(useParams());
+  // console.log(useHistory());
+  // console.log(useLocation());
+  console.log(props);
+  useEffect(() => {
+    setimages(store.getState().images);
+    store.subscribe(()=>{
+      setimages(store.getState().images);
+      setformContent(store.getState().currentMeme);
+    })
+    
+  }, []);
+
+  useEffect(() => {
+    if(undefined!==props.match.params.id){
+      store.dispatch({type:REDUCER_ACTIONS.SET_CURRENT_MEME_ID,value:Number(props.match.params.id)})
+    }
+  }, [store.getState().images,store.getState().memes]);
 
   return (
     <form className={styles.MemeForm} data-testid="MemeForm">
@@ -20,8 +42,9 @@ const MemeForm = (props) => {
       <select id="meme-image" value={formContent.imageId} onChange={(evt) => {
         setformContent({ ...formContent, imageId: Number(evt.target.value) })
       }}>
+        <option value=""></option>
         {
-          props.images.map((e, i) => <option key={'option-image-' + i} value={e.id}>{e.nom}</option>)
+          images.map((e, i) => <option key={'option-image-' + i} value={e.id}>{e.nom}</option>)
         }
         {/* <option value="img/5element.jpg">5eme element</option> */}
         {/* <option value="img/futurama.jpg">Futurama</option> */}
@@ -64,19 +87,18 @@ const MemeForm = (props) => {
       </div>
 
       <div style={{ margin: '20px 0' }}>
-        <Button label="Cancel" couleurDeFond="red" onClick={() => { setformContent(initialState) }} />
-        <Button label="Ok" couleurDeFond="darkgreen" onClick={() => { props.onSubmit(formContent) }} />
+        <Button label="Cancel" couleurDeFond="red" onClick={() => { 
+          setformContent(initialState.currentMeme);
+          store.dispatch({type:REDUCER_ACTIONS.CLEAR_CURRENT,value:formContent}) }} />
+        <Button label="Ok" couleurDeFond="darkgreen" onClick={() => { store.dispatch({type:REDUCER_ACTIONS.SET_CURRENT,value:formContent}) }} />
       </div>
 
     </form>
-  );
+  )
 };
 
-MemeForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  images: PropTypes.array.isRequired
-};
+MemeForm.propTypes = {};
 
 MemeForm.defaultProps = {};
 
-export default MemeForm;
+export default withRouter(MemeForm);
